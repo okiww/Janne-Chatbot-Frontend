@@ -1,0 +1,33 @@
+.ui-avatar {
+    $c: &;
+
+    &__content {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        width: 30px;
+        height: 30px;
+        overflow: hidden;
+        background-color: #7585dc;
+        margin: 5px;
+
+        i {
+            color: white;
+        }
+    }
+
+    /*
+	 * Type Avatar
+	 */
+    &--circle {
+        #{$c}__content {
+            border-radius: 50%;
+        }
+    }
+
+    &--rectangle {
+        #{$c}__content {
+            border-radius: 5px;
+        }
+    }
+}
