@@ -44,7 +44,10 @@ module.exports = {
                 extensions: ['.js', '.jsx']
             }
         ],
-        'react/jsx-indent': [1, 4]
+        'react/jsx-indent': [2, 4],
+        'react/jsx-indent-props': [2, 4],
+        'react/jsx-closing-bracket-location': 0,
+        'react/jsx-max-props-per-line': [2, { maximum: 1, when: 'multiline' }]
     },
     globals: {
         document: false,
