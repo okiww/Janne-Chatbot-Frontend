@@ -15,12 +15,23 @@ class AvatarComponent extends React.PureComponent {
         return ArrayHelper.ObjectToString(response);
     }
 
+    get style() {
+        const { size } = this.props;
+
+        return {
+            width: size,
+            height: size
+        };
+    }
+
     render() {
         const { children } = this.props;
 
         return (
             <div className={this.className}>
-                <div className="ui-avatar__content">{children}</div>
+                <div className="ui-avatar__content" style={this.style}>
+                    {children}
+                </div>
             </div>
         );
     }
@@ -28,12 +39,14 @@ class AvatarComponent extends React.PureComponent {
 
 AvatarComponent.propTypes = {
     children: PropTypes.oneOfType([PropTypes.string, PropTypes.number, PropTypes.element]),
-    type: PropTypes.oneOf(['circle', 'rectangle'])
+    type: PropTypes.oneOf(['circle', 'rectangle']),
+    size: PropTypes.oneOfType([PropTypes.string, PropTypes.number])
 };
 
 AvatarComponent.defaultProps = {
     children: null,
-    type: 'circle'
+    type: 'circle',
+    size: '30px'
 };
 
 export default AvatarComponent;
