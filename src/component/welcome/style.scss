@@ -1,0 +1,31 @@
+.ui-welcome {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    text-align: center;
+    width: 100%;
+    position: absolute;
+    height: calc(100% - 120px);
+    top: 70px;
+    padding: 10px;
+
+    &__image {
+        width: 250px;
+    }
+
+    .ui-text--h2 {
+        margin: 20px 0 10px;
+    }
+
+    .ui-text--p {
+        margin: 0 0 20px;
+        letter-spacing: 0.5px;
+        font-size: 14px;
+        color: #737984;
+    }
+
+    .ui-button {
+        padding: 10px 35px;
+    }
+}

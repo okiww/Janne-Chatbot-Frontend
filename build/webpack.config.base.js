@@ -107,6 +107,11 @@ module.exports = {
                 from: utils.resolve('static/font'),
                 to: utils.resolve('dist/static/font'),
                 toType: 'dir'
+            },
+            {
+                from: utils.resolve('static/images'),
+                to: utils.resolve('dist/static/images'),
+                toType: 'dir'
             }
         ])
     ]
