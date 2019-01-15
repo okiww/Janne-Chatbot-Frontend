@@ -2,28 +2,64 @@
 <html lang="en">
     <head>
         <meta charset="UTF-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <meta http-equiv="X-UA-Compatible" content="ie=edge" />
-        <link rel="preload" href="/static/font/avenir/style.css" as="style" />
-        <link rel="preload" href="https://fonts.googleapis.com/icon?family=Material+Icons" as="style" />
+        <meta
+            name="viewport"
+            content="width=device-width, initial-scale=1.0"
+        />
+        <meta
+            http-equiv="X-UA-Compatible"
+            content="ie=edge"
+        />
+        <link
+            rel="preload"
+            href="/static/font/avenir/style.css"
+            as="style"
+        />
+        <link
+            rel="preload"
+            href="https://s3.amazonaws.com/public.urbanindo.com/fonts/UrbanIndoIcons-20170831060809/fonts.css"
+            as="style"
+        />
+        <link
+            rel="preload"
+            href="https://fonts.googleapis.com/icon?family=Material+Icons"
+            as="style"
+        />
+        <link
+            rel="stylesheet"
+            type="text/css"
+            charset="UTF-8"
+            href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.6.0/slick.min.css"
+        />
+        <link
+            rel="stylesheet"
+            type="text/css"
+            href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.6.0/slick-theme.min.css"
+        />
         <title>Document</title>
     </head>
     <body>
         <div id="app"></div>
     </body>
     <script>
-        var el = document.querySelectorAll("link[rel='preload']");
+        var el = document.querySelectorAll(
+            "link[rel='preload']"
+        );
         var usedLaterScript = null;
 
         for (obj of el) {
             if (obj.as === 'style') {
-                usedLaterScript = document.createElement('link');
+                usedLaterScript = document.createElement(
+                    'link'
+                );
                 usedLaterScript.rel = 'stylesheet';
                 usedLaterScript.href = obj.href;
 
                 document.head.appendChild(usedLaterScript);
             } else {
-                usedLaterScript = document.createElement('script');
+                usedLaterScript = document.createElement(
+                    'script'
+                );
                 usedLaterScript.src = obj.href;
 
                 document.body.appendChild(usedLaterScript);
