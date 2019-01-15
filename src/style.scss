@@ -1,3 +1,22 @@
 * {
     box-sizing: border-box;
 }
+
+::-moz-selection {
+    /* Code for Firefox */
+    color: white;
+    background: #5f6fee;
+}
+
+::selection {
+    color: white;
+    background: #5f6fee;
+}
+
+.template {
+    display: flex;
+
+    .ui-chat-template {
+        margin: 10px;
+    }
+}

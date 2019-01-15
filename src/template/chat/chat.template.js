@@ -2,8 +2,9 @@ import React, { lazy, Suspense } from 'react';
 
 import './style.scss';
 
-const Header = lazy(() => import('@/component/header/header.component'));
 const Form = lazy(() => import('@/component/form/form.component'));
+const Header = lazy(() => import('@/component/header/header.component'));
+const ChatContainer = lazy(() => import('@/component/chat-container/chat-container.component'));
 const Welcome = lazy(() => import('@/component/welcome/welcome.component'));
 
 class ChatTemplate extends React.PureComponent {
@@ -13,7 +14,8 @@ class ChatTemplate extends React.PureComponent {
                 <Suspense fallback={<div>Loading...</div>}>
                     <Header />
                     <Welcome />
-                    <Form />
+                    <ChatContainer />
+                    <Form disabled />
                 </Suspense>
             </div>
         );
