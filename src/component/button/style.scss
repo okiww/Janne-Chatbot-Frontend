@@ -5,24 +5,34 @@
     background: transparent;
     border-radius: 5px;
     padding: 10px 15px;
-    transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
     cursor: pointer;
     font-family: 'Avenir Next', sans-serif;
     font-size: 16px;
     color: white;
+    outline: none;
+    transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
 
     &:hover {
-        box-shadow: 0 14px 28px rgba(0, 0, 0, 0.1), 0 10px 10px rgba(0, 0, 0, 0.075);
+        box-shadow: 0 14px 28px rgba(0, 0, 0, 0.1),
+            0 10px 10px rgba(0, 0, 0, 0.075);
     }
 
     &--primary {
-        background-color: #7585dc;
+        background-color: #3893d9;
         letter-spacing: 0.25px;
     }
 
     &--gradient {
         background: #5f6fee;
-        background: -webkit-linear-gradient(135deg, #5f8eee, #5f6fee); /* Chrome 10-25, Safari 5.1-6 */
-        background: linear-gradient(135deg, #5f8eee, #5f6fee);
+        background: -webkit-linear-gradient(
+            135deg,
+            #5f8eee,
+            #5f6fee
+        ); /* Chrome 10-25, Safari 5.1-6 */
+        background: linear-gradient(
+            135deg,
+            #5f8eee,
+            #5f6fee
+        );
     }
 }

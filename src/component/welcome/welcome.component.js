@@ -8,15 +8,17 @@ class WelcomeComponent extends React.PureComponent {
     render() {
         return (
             <div className="ui-welcome">
-                <img className="ui-welcome__image" src="static/images/welcome.jpg" alt="" />
+                <div className="ui-welcome__image">
+                    <img src="static/images/illustrator chatbot-01.png" alt="" />
+                </div>
                 <Text type="h2" fontWeight="semi-bold">
                     You're all set!
                 </Text>
                 <Text type="p">
-                    Remember that you can always reach me by pressing the fitsy icon in the left
+                    Remember that you can always reach me by pressing the Nico icon in the left
                     bottom corner
                 </Text>
-                <Button type="gradient">Start Using Fitsy</Button>
+                <Button>Start Using Nico</Button>
             </div>
         );
     }
