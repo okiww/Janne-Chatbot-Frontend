@@ -31,7 +31,7 @@ class HeaderComponent extends React.PureComponent {
                         NICO
                     </Text>
                     <Text tag="p" type="h6">
-                        Lorem Ipsum Dolor Sim Amet
+                        Your personal Agent
                     </Text>
                 </div>
             </div>

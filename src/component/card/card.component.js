@@ -9,22 +9,22 @@ class Card extends React.PureComponent {
     get attribute() {
         return [
             {
-                icon: 'uif uif-property-bedrooms',
+                icon: 'static/images/property/bed.svg',
                 label: 'K. Tidur',
                 value: 2
             },
             {
-                icon: 'uif uif-property-bathrooms',
+                icon: 'static/images/property/bath.svg',
                 label: 'K. Mandi',
                 value: 1
             },
             {
-                icon: 'uif uif-property-landSize',
+                icon: 'static/images/property/land.svg',
                 label: '',
                 value: 150
             },
             {
-                icon: 'uif uif-property-buildingSize',
+                icon: 'static/images/property/building.svg',
                 label: '',
                 value: 60
             }
@@ -56,8 +56,8 @@ class Card extends React.PureComponent {
                     <div className="ui-card__address">{city}</div>
                     <div className="ui-card__attribute">
                         {this.attribute.map((item) => (
-                            <div className="ui-card__attribute__item" key={item.label}>
-                                <i className={item.icon} />
+                            <div key={item.label} className="ui-card__attribute__item">
+                                <img alt="" src={item.icon} />
                                 <Text>
                                     {item.value}
                                     {item.label === 'L. Bangunan' || item.label === 'L. Tanah'

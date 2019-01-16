@@ -7,6 +7,11 @@ import TextComponent from '@/component/text/text.component';
 import './style.scss';
 
 class ButtonComponent extends React.Component {
+    constructor(props) {
+        super(props);
+        this.onClick = this.onClick.bind(this);
+    }
+
     onClick() {
         const { onClick } = this.props;
 
@@ -27,7 +32,7 @@ class ButtonComponent extends React.Component {
         const { children } = this.props;
 
         return (
-            <button className={this.className} type="submit">
+            <button onClick={this.onClick} className={this.className} type="submit">
                 <TextComponent type="h5">{children}</TextComponent>
             </button>
         );
