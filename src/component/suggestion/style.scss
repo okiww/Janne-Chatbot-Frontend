@@ -1,7 +1,6 @@
 .ui-suggestion {
     position: absolute;
     bottom: 5px;
-    margin: 0 -10px;
     display: block;
     width: 100%;
     transform: translateY(100%);
@@ -15,7 +14,7 @@
         margin: 0 10px;
         text-align: center;
         border-radius: 13px;
-        background-color: #deedfa;
+        background-color: #e5ecfd;
         cursor: pointer;
         transition: all 0.3s
             cubic-bezier(0.25, 0.8, 0.25, 1);
@@ -29,7 +28,7 @@
         .ui-text {
             &.ui-text--p {
                 font-size: 13px;
-                color: #3893d9;
+                color: #537fed;
                 line-height: 16px;
                 margin: 5px;
             }
@@ -58,7 +57,7 @@
             &.slick-next,
             &.slick-prev {
                 &:before {
-                    color: rgba(#3893d9, 0.5);
+                    color: rgba(#537fed, 0.5);
                 }
             }
         }
@@ -88,7 +87,7 @@
                 border-radius: 50%;
                 overflow: hidden;
                 opacity: 1;
-                color: #3893d9;
+                color: #537fed;
                 transition: all 0.3s
                     cubic-bezier(0.25, 0.8, 0.25, 1);
 

@@ -23,7 +23,7 @@ class HeaderComponent extends React.PureComponent {
             <div className={this.className}>
                 <div className="ui-header__image">
                     <Avatar size="35px">
-                        <img src="static/images/nico.svg" alt="" />
+                        <img src="static/images/nico.png" alt="" />
                     </Avatar>
                 </div>
                 <div className="ui-header__title">
