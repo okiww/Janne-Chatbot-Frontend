@@ -8,28 +8,6 @@ import Text from '@/component/text/text.component';
 import './style.scss';
 
 class SuggestionComponent extends React.PureComponent {
-    componentWillMount() {
-        this.setState({
-            data: [
-                {
-                    text: 'Rumah Dijual'
-                },
-                {
-                    text: 'Apartemen Disewa'
-                },
-                {
-                    text: 'Rumah Dijual'
-                },
-                {
-                    text: 'Ruko Dijual'
-                },
-                {
-                    text: 'Ruko Disewa'
-                }
-            ]
-        });
-    }
-
     get className() {
         const { show } = this.props;
         const response = {
@@ -41,7 +19,7 @@ class SuggestionComponent extends React.PureComponent {
     }
 
     render() {
-        const { data } = this.state;
+        const { data } = this.props;
         const settings = {
             arrows: false,
             centerMode: false,
@@ -67,11 +45,13 @@ class SuggestionComponent extends React.PureComponent {
 }
 
 SuggestionComponent.propTypes = {
-    show: PropTypes.bool
+    show: PropTypes.bool,
+    data: PropTypes.arrayOf(PropTypes.shape({}))
 };
 
 SuggestionComponent.defaultProps = {
-    show: false
+    show: false,
+    data: []
 };
 
 export default SuggestionComponent;

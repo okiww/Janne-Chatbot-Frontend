@@ -1,0 +1,57 @@
+.ui-list-chat {
+    display: block;
+    padding: 10px;
+    text-align: left;
+
+    &__item {
+        position: relative;
+
+        > .ui-text.ui-text--p {
+            display: inline-block;
+            padding: 10px 15px;
+            margin: 7.5px 0;
+            max-width: 65%;
+            border-radius: 10px;
+            word-wrap: break-word;
+            font-size: 14px;
+        }
+
+        &--bot {
+            position: relative;
+
+            .ui-text.ui-text--p {
+                background-color: #537fed;
+                color: white;
+                margin-left: 40px;
+            }
+
+            &.ui-list-chat__item--without-icon {
+                &::before {
+                    display: none;
+                }
+            }
+
+            &::before {
+                content: '';
+                position: absolute;
+                top: calc(50% - 12px);
+                width: 24px;
+                height: 24px;
+                background-color: #e0e0e0;
+                background-image: url('../../../static/images/nico.svg');
+                background-size: 24px;
+                border-radius: 50%;
+                overflow: hidden;
+            }
+        }
+
+        &--user {
+            text-align: right;
+
+            .ui-text.ui-text--p {
+                background-color: #f1f4f7;
+                color: #3e4246;
+            }
+        }
+    }
+}

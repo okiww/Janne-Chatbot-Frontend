@@ -1,7 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { Scrollbars } from 'react-custom-scrollbars';
 import AnimateHelper from '@/helper/animate.helper';
-import ListProperty from '@/component/list-property/list-property.component';
+import ListChat from '@/component/list-chat/list-chat.component';
 import Suggestion from '@/component/suggestion/suggestion.component';
 
 import './style.scss';
@@ -67,23 +68,31 @@ class ChatContainerComponent extends React.PureComponent {
 
     render() {
         const { style } = this.state;
-        const { show } = this.props;
+        const { suggestion, chat } = this.props;
         return (
             <div style={style} className="ui-chat-container">
-                {show}
-                <ListProperty />
-                <Suggestion />
+                <Scrollbars autoHide>
+                    <ListChat data={chat} />
+                </Scrollbars>
+                <Suggestion {...suggestion} />
             </div>
         );
     }
 }
 
 ChatContainerComponent.propTypes = {
-    show: PropTypes.bool
+    chat: PropTypes.arrayOf(PropTypes.shape({})),
+    show: PropTypes.bool,
+    suggestion: PropTypes.shape({})
 };
 
 ChatContainerComponent.defaultProps = {
-    show: false
+    chat: [],
+    show: false,
+    suggestion: {
+        show_options: false,
+        list: []
+    }
 };
 
 export default ChatContainerComponent;

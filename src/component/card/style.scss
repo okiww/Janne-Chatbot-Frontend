@@ -6,6 +6,7 @@
     border: thin solid #bdccd9;
     transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
     cursor: pointer;
+    background: white;
 
     &:hover {
         box-shadow: 0 10px 20px rgba(#bdccd9, 0.125),
@@ -75,8 +76,8 @@
             font-weight: 500;
 
             img {
-                width: 13.5px;
-                height: 13.5px;
+                width: 15px;
+                height: 15px;
                 margin-right: 5px;
             }
 

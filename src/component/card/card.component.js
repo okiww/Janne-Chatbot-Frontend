@@ -24,7 +24,7 @@ class Card extends React.PureComponent {
                 value: 150
             },
             {
-                icon: 'static/images/property/building.svg',
+                icon: 'static/images/property/home.svg',
                 label: '',
                 value: 60
             }

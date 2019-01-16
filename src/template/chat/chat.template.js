@@ -1,6 +1,7 @@
 import React, { lazy, Suspense } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
+import AnimateHelper from '@/helper/animate.helper';
 import { showNavbarAction } from '@/actions/status.action';
 
 import './style.scss';
@@ -11,7 +12,9 @@ const ChatContainer = lazy(() => import('@/component/chat-container/chat-contain
 const Welcome = lazy(() => import('@/component/welcome/welcome.component'));
 
 const mapStateToProps = (state) => ({
-    show: state.StatusReducers.show_navbar
+    show: state.StatusReducers.show_navbar,
+    suggestion: state.OptionReducers,
+    chat: state.ChatReducers.chat
 });
 
 const mapDispatchToProps = (dispatch) => ({
@@ -19,9 +22,21 @@ const mapDispatchToProps = (dispatch) => ({
 });
 
 class ChatTemplate extends React.PureComponent {
+    state = {
+        showDialog: false,
+        style: { opacity: 0, display: 'none' },
+        styleButton: { opacity: 0, display: 'none' }
+    };
+
     constructor(props) {
         super(props);
         this.setShowNavbar = this.setShowNavbar.bind(this);
+        this.showChatDialog = this.showChatDialog.bind(this);
+        this.helper = new AnimateHelper();
+    }
+
+    componentDidMount() {
+        this.setAnimationButton();
     }
 
     setShowNavbar() {
@@ -29,30 +44,103 @@ class ChatTemplate extends React.PureComponent {
         showNavbar();
     }
 
+    setAnimation({ callback = () => {}, duration = 610, interval = 610 }) {
+        setTimeout(() => {
+            this.helper.render(callback, duration);
+        }, interval);
+    }
+
+    setAnimationComponent(show) {
+        this.setAnimation({
+            callback: (x) => this.animationComponent(show, x),
+            duration: 166,
+            interval: 0
+        });
+    }
+
+    setAnimationButton() {
+        this.setAnimation({
+            callback: (x) => this.animationButton(x),
+            duration: 166,
+            interval: 1500
+        });
+    }
+
+    showChatDialog() {
+        const { showDialog } = this.state;
+        this.setState({ showDialog: !showDialog }, () => {
+            // eslint-disable-next-line
+            this.setAnimationComponent(this.state.showDialog);
+        });
+    }
+
+    animationComponent(show, x) {
+        const style = {
+            opacity: show ? x : 1 - x
+        };
+        const translate = x * 5;
+
+        if (show) {
+            style.display = x > 0.05 ? 'block' : 'none';
+            style.transform = `translateY(${5 - translate}%)`;
+        } else {
+            style.display = x > 0.95 ? 'none' : 'block';
+            style.transform = `translateY(${translate}%)`;
+        }
+
+        this.setState({ style });
+    }
+
+    animationButton(x) {
+        const styleButton = {
+            opacity: x
+        };
+
+        this.setState({ styleButton });
+    }
+
     render() {
-        const { show } = this.props;
+        const { show, suggestion, chat } = this.props;
+        const { style, styleButton } = this.state;
 
         return (
-            <div className="ui-chat-template">
-                <Suspense fallback={null}>
-                    <Header show={show} />
-                    <Welcome show={!show} onShowWelcome={this.setShowNavbar} />
-                    <ChatContainer show={show} />
-                    <Form disabled={!show} />
-                </Suspense>
+            <div className="ui-chat">
+                <div className="ui-chat-template" style={style}>
+                    <Suspense fallback={null}>
+                        <Header show={show} />
+                        <Welcome show={!show} onShowWelcome={this.setShowNavbar} />
+                        <ChatContainer chat={chat} show={show} suggestion={suggestion} />
+                        <Form disabled={!show} />
+                    </Suspense>
+                </div>
+                <button
+                    style={styleButton}
+                    className="ui-chat-template__button"
+                    type="submit"
+                    onClick={this.showChatDialog}
+                >
+                    <img src="./static/images/apps.png" alt="" />
+                </button>
             </div>
         );
     }
 }
 
 ChatTemplate.propTypes = {
+    chat: PropTypes.arrayOf(PropTypes.shape({})),
     show: PropTypes.bool,
-    showNavbar: PropTypes.func
+    showNavbar: PropTypes.func,
+    suggestion: PropTypes.shape({})
 };
 
 ChatTemplate.defaultProps = {
+    chat: [],
     show: false,
-    showNavbar: () => {}
+    showNavbar: () => {},
+    suggestion: {
+        show_options: false,
+        list: []
+    }
 };
 
 export default connect(

@@ -1,0 +1,63 @@
+.ui-header-template {
+    padding: 18px 60px;
+    width: 100%;
+
+    img,
+    &__menu,
+    &__account {
+        display: inline-block;
+        margin: 0;
+        padding: 0;
+        height: 40px;
+    }
+
+    img {
+        height: 40px;
+        margin-right: 60px;
+    }
+
+    &__menu,
+    &__account {
+        list-style: none;
+
+        li {
+            float: left;
+            line-height: 40px;
+            margin: 0 16px;
+
+            p {
+                color: #fff;
+                text-transform: uppercase;
+                letter-spacing: 0.25px;
+                font-size: 14px;
+                cursor: pointer;
+            }
+        }
+    }
+
+    &__account {
+        float: right;
+
+        &__primary {
+            p {
+                border-radius: 25.5px;
+                padding: 0 20px;
+                box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.1);
+                background-color: #55c69c;
+                text-align: center;
+                line-height: normal;
+                height: 40px;
+                line-height: 40px;
+                transition: all 0.3s
+                    cubic-bezier(0.25, 0.8, 0.25, 1);
+
+                &:hover {
+                    background-color: darken(#55c69c, 5);
+                    box-shadow: 0 2px 4px 0
+                            rgba(0, 0, 0, 0.1),
+                        0 4px 8px 0 rgba(0, 0, 0, 0.05);
+                }
+            }
+        }
+    }
+}

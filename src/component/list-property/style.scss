@@ -24,7 +24,7 @@
             &.slick-next,
             &.slick-prev {
                 &:before {
-                    color: rgba(#3893d9, 0.5);
+                    color: rgba(#537fed, 0.5);
                 }
             }
         }
@@ -54,7 +54,7 @@
                 border-radius: 50%;
                 overflow: hidden;
                 opacity: 1;
-                color: #3893d9;
+                color: #537fed;
                 transition: all 0.3s
                     cubic-bezier(0.25, 0.8, 0.25, 1);
 
