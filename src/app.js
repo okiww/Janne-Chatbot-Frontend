@@ -6,7 +6,8 @@ import configureStore from './reducers';
 import './style.scss';
 
 const ChatTemplate = lazy(() => import('./template/chat/chat.template'));
-const Loading = lazy(() => import('@/component/loading/loading.component'));
+const MessageTemplate = lazy(() => import('./template/message/message.template'));
+const HeaderTemplate = lazy(() => import('./template/header/header.template'));
 
 const store = configureStore();
 
@@ -14,8 +15,9 @@ render(
     <Provider store={store}>
         <div className="template">
             <Suspense fallback={null}>
+                <HeaderTemplate />
+                <MessageTemplate />
                 <ChatTemplate />
-                <Loading />
             </Suspense>
         </div>
     </Provider>,

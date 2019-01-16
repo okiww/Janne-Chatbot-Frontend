@@ -2,6 +2,30 @@
     box-sizing: border-box;
 }
 
+body {
+    background-image: linear-gradient(
+        125deg,
+        #527eed,
+        #83aef1
+    );
+    width: 100vw;
+    height: 100vh;
+    overflow: hidden;
+    margin: 0;
+    padding: 0;
+
+    &::before {
+        content: '';
+        position: absolute;
+        bottom: -10px;
+        left: -25px;
+        width: 205px;
+        height: 190px;
+        background-image: url('../static/images/grass.png');
+        background-size: 205px 190px;
+    }
+}
+
 ::-moz-selection {
     /* Code for Firefox */
     color: white;
@@ -14,8 +38,6 @@
 }
 
 .template {
-    display: flex;
-
     .ui-chat-template {
         margin: 10px;
     }

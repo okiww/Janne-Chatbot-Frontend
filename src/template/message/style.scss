@@ -1,0 +1,82 @@
+.ui-message-template {
+    display: block;
+    padding: 30px 60px;
+
+    &__content,
+    img {
+        display: inline-block;
+    }
+
+    &__content {
+        max-width: calc(100% - 760px);
+        float: left;
+
+        h1,
+        h3,
+        p,
+        a {
+            font-family: 'Avenir Next', sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+
+        h1 {
+            font-size: 72px;
+            font-weight: 900;
+            font-style: normal;
+            font-stretch: normal;
+            line-height: normal;
+            letter-spacing: normal;
+            color: #ffffff;
+        }
+
+        h3 {
+            font-size: 48px;
+            font-weight: 500;
+            font-style: normal;
+            font-stretch: normal;
+            line-height: normal;
+            letter-spacing: normal;
+            color: #ffffff;
+            margin: 10px 0 20px;
+        }
+
+        p {
+            font-size: 14px;
+            font-weight: 500;
+            font-style: normal;
+            font-stretch: normal;
+            line-height: 1.71;
+            letter-spacing: normal;
+            color: #ffffff;
+        }
+
+        a {
+            display: inline-block;
+            border-radius: 25.5px;
+            box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.1);
+            background-color: #55c69c;
+            text-align: center;
+            line-height: normal;
+            height: 40px;
+            padding: 0 20px;
+            line-height: 40px;
+            transition: all 0.3s
+                cubic-bezier(0.25, 0.8, 0.25, 1);
+            text-decoration: none;
+            color: #fff;
+            margin-top: 35px;
+
+            &:hover {
+                background-color: darken(#55c69c, 5);
+                box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.1),
+                    0 4px 8px 0 rgba(0, 0, 0, 0.05);
+            }
+        }
+    }
+
+    img {
+        width: 600px;
+        float: right;
+    }
+}
