@@ -9,6 +9,7 @@
     height: 50px;
     border-top: thin solid #d8e2e8;
     overflow: hidden;
+    z-index: 100;
 
     &::before {
         content: '';
@@ -17,7 +18,7 @@
         top: -1px;
         width: 100%;
         height: calc(100% + 1px);
-        background-color: rgba(221, 221, 221, 0.5);
+        background-color: rgba(221, 221, 221, 0.25);
         transform: translateY(-100%);
         opacity: 0;
         transition: all 0.3s
