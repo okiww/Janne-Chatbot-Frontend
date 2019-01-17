@@ -38,6 +38,7 @@ module.exports = {
         semi: [2, 'always'],
         'space-before-function-paren': 'off',
         'react/prefer-stateless-function': 'off',
+        'react/no-array-index-key': 0,
         'react/no-unescaped-entities': 0,
         'react/jsx-filename-extension': [
             1,
