@@ -10,6 +10,7 @@ import './style.scss';
 class ChatContainerComponent extends React.PureComponent {
     state = {
         show: false,
+        chat: [],
         style: { opacity: 0, zIndex: -1 }
     };
 
@@ -20,22 +21,28 @@ class ChatContainerComponent extends React.PureComponent {
     }
 
     static getDerivedStateFromProps(props, state) {
-        const { show } = props;
+        const { show, chat } = props;
 
         if (show !== state.show) {
             return {
-                show
+                show,
+                chat
             };
         }
 
-        return null;
+        return { chat };
     }
 
     componentDidUpdate(_, prevState) {
-        const { show } = this.state;
+        const { show, chat } = this.state;
 
         if (prevState.show !== show) {
             this.setAnimationComponent(show);
+        }
+
+        if (prevState.chat.length <= chat.length) {
+            const scrollHeight = this.scrollbars.getScrollHeight();
+            this.scrollbars.scrollTop(scrollHeight);
         }
     }
 
@@ -67,11 +74,19 @@ class ChatContainerComponent extends React.PureComponent {
     }
 
     render() {
-        const { style } = this.state;
-        const { suggestion, chat } = this.props;
+        const { style, chat } = this.state;
+        const { suggestion } = this.props;
+
         return (
             <div style={style} className="ui-chat-container">
-                <Scrollbars autoHide>
+                <Scrollbars
+                    ref={(ref) => {
+                        this.scrollbars = ref;
+
+                        return true;
+                    }}
+                    autoHide
+                >
                     <ListChat data={chat} />
                 </Scrollbars>
                 <Suggestion {...suggestion} />
