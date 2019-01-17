@@ -1,8 +1,10 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
 import AnimateHelper from '@/helper/animate.helper';
 import Text from '@/component/text/text.component';
 import Button from '@/component/button/button.component';
+import { fetchChatSuccess as fs } from '@/actions/chat.action';
 
 import './style.scss';
 
@@ -40,8 +42,9 @@ class WelcomeComponent extends React.PureComponent {
     }
 
     onClickStart() {
-        const { onShowWelcome } = this.props;
-
+        console.log('test');
+        const { onShowWelcome, fetchChatSuccess } = this.props;
+        fetchChatSuccess();
         onShowWelcome();
     }
 
@@ -89,11 +92,17 @@ class WelcomeComponent extends React.PureComponent {
 }
 
 WelcomeComponent.propTypes = {
-    onShowWelcome: PropTypes.func
+    onShowWelcome: PropTypes.func,
+    fetchChatSuccess: PropTypes.func
 };
 
 WelcomeComponent.defaultProps = {
-    onShowWelcome: () => {}
+    onShowWelcome: () => {},
+    fetchChatSuccess: () => {}
 };
 
-export default WelcomeComponent;
+const mapDispatchToProps = (dispatch) => ({
+    chat: () => dispatch(fs())
+});
+
+export default connect(null, mapDispatchToProps)(WelcomeComponent);

@@ -3,6 +3,7 @@ import { Provider } from 'react-redux';
 import { render } from 'react-dom';
 import configureStore from './reducers';
 
+
 import './style.scss';
 
 const ChatTemplate = lazy(() => import('./template/chat/chat.template'));
