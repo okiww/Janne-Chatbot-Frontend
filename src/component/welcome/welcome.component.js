@@ -4,9 +4,17 @@ import { connect } from 'react-redux';
 import AnimateHelper from '@/helper/animate.helper';
 import Text from '@/component/text/text.component';
 import Button from '@/component/button/button.component';
-import { fetchChatSuccess as fs } from '@/actions/chat.action';
+import { fetchChatSuccess } from '@/actions/chat.action';
+import { setDataOption, showOption, hideOption } from '@/actions/option.action';
 
 import './style.scss';
+
+const mapDispatchToProps = (dispatch) => ({
+    setMessage: (data) => dispatch(fetchChatSuccess(data)),
+    showOptionBar: () => dispatch(showOption()),
+    hideOptionBar: () => dispatch(hideOption()),
+    setDataOptionBar: (data) => dispatch(setDataOption(data))
+});
 
 class WelcomeComponent extends React.PureComponent {
     state = {
@@ -42,10 +50,10 @@ class WelcomeComponent extends React.PureComponent {
     }
 
     onClickStart() {
-        console.log('test');
-        const { onShowWelcome, fetchChatSuccess } = this.props;
-        fetchChatSuccess();
+        const { onShowWelcome } = this.props;
         onShowWelcome();
+
+        this.fetchData();
     }
 
     setAnimation({ callback = () => {}, duration = 610, interval = 610 }) {
@@ -60,6 +68,46 @@ class WelcomeComponent extends React.PureComponent {
             duration: 166,
             interval: 0
         });
+    }
+
+    fetchData() {
+        const {
+            setMessage,
+            setDataOptionBar,
+            showOptionBar,
+            hideOptionBar
+        } = this.props;
+
+        fetch('https://nicochatbot.herokuapp.com/')
+            .then((res) => res.json())
+            .then(({ data }) => {
+                const response = data.map((item) => {
+                    const { message, type } = item;
+
+                    if (type === 'options') {
+                        setDataOptionBar(
+                            item.data.map((x) => ({
+                                ...x,
+                                text: x.message
+                            }))
+                        );
+
+                        setTimeout(() => {
+                            showOptionBar();
+                        }, 1000);
+                    } else {
+                        hideOptionBar();
+                    }
+
+                    return {
+                        type: 'bot',
+                        message
+                    };
+                });
+
+                setMessage(response);
+                return data;
+            });
     }
 
     animationComponent(x) {
@@ -93,16 +141,21 @@ class WelcomeComponent extends React.PureComponent {
 
 WelcomeComponent.propTypes = {
     onShowWelcome: PropTypes.func,
-    fetchChatSuccess: PropTypes.func
+    setMessage: PropTypes.func,
+    setDataOptionBar: PropTypes.func,
+    showOptionBar: PropTypes.func,
+    hideOptionBar: PropTypes.func
 };
 
 WelcomeComponent.defaultProps = {
     onShowWelcome: () => {},
-    fetchChatSuccess: () => {}
+    setMessage: () => {},
+    setDataOptionBar: () => {},
+    showOptionBar: () => {},
+    hideOptionBar: () => {}
 };
 
-const mapDispatchToProps = (dispatch) => ({
-    chat: () => dispatch(fs())
-});
-
-export default connect(null, mapDispatchToProps)(WelcomeComponent);
+export default connect(
+    null,
+    mapDispatchToProps
+)(WelcomeComponent);

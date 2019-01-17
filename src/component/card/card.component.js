@@ -6,29 +6,61 @@ import './style.scss';
 import Text from '@/component/text/text.component';
 
 class Card extends React.PureComponent {
+    static getRandom() {
+        return Math.floor(Math.random() * 80917413579170571);
+    }
+
+    static priceFormatter(price) {
+        if (price > 999999999) {
+            return `${(price / 1000000000).toFixed(1)}m`;
+        }
+        if (price > 999999) {
+            return `${(price / 1000000).toFixed(1)}jt`;
+        }
+        if (price > 999) {
+            return `${(price / 1000).toFixed(1)}rb`;
+        }
+
+        return price;
+    }
+
     get attribute() {
-        return [
+        const { attribute } = this.props;
+        const field = [
             {
                 icon: 'static/images/property/bed.svg',
                 label: 'K. Tidur',
-                value: 2
+                key: 'bedroom',
+                value: null
             },
             {
                 icon: 'static/images/property/bath.svg',
                 label: 'K. Mandi',
-                value: 1
+                key: 'bathroom',
+                value: null
             },
             {
                 icon: 'static/images/property/land.svg',
-                label: '',
-                value: 150
+                label: 'm<sup>2</sup>',
+                key: 'land',
+                value: null
             },
             {
                 icon: 'static/images/property/home.svg',
-                label: '',
-                value: 60
+                label: 'm<sup>2</sup>',
+                key: 'building',
+                value: null
             }
         ];
+
+        return field.map((item) => {
+            const isFieldExist = Object.prototype.hasOwnProperty.call(attribute, item.key);
+
+            return {
+                ...item,
+                value: isFieldExist && attribute[item.key]
+            };
+        });
     }
 
     renderMetric() {
@@ -41,7 +73,9 @@ class Card extends React.PureComponent {
     }
 
     render() {
-        const { image, title, city } = this.props;
+        const {
+            id, image, title, location, price, mortgage
+        } = this.props;
 
         return (
             <div className="ui-card">
@@ -50,20 +84,30 @@ class Card extends React.PureComponent {
                 </div>
                 <div className="ui-card__content">
                     <div className="ui-card__price">
-                        <Text type="h2">Rp 326jt-an</Text>
-                        <Text type="p">Cicilan Rp. 2,61 jt/bln</Text>
+                        <Text type="h2">
+                            Rp
+                            {Card.priceFormatter(price)}
+                        </Text>
+                        <Text type="p">
+                            Cicilan
+                            {mortgage || 'Rp. 2,61jt / bulan'}
+                        </Text>
                     </div>
-                    <div className="ui-card__address">{city}</div>
+                    <div className="ui-card__address">{location}</div>
                     <div className="ui-card__attribute">
                         {this.attribute.map((item) => (
-                            <div key={item.label} className="ui-card__attribute__item">
+                            <div
+                                key={`${id}-${item.label}-${Card.getRandom()}`}
+                                className="ui-card__attribute__item"
+                            >
                                 <img alt="" src={item.icon} />
                                 <Text>
-                                    {item.value}
-                                    {item.label === 'L. Bangunan' || item.label === 'L. Tanah'
-                                        ? this.renderMetric()
-                                        : null}
-                                    {item.label}
+                                    {item.value ? item.value : '-'}&nbsp;
+                                    <span
+                                        dangerouslySetInnerHTML={{
+                                            __html: item.value ? item.label : null
+                                        }}
+                                    />
                                 </Text>
                             </div>
                         ))}
@@ -75,9 +119,17 @@ class Card extends React.PureComponent {
 }
 
 Card.propTypes = {
-    image: PropTypes.string.isRequired,
+    id: PropTypes.string.isRequired,
     title: PropTypes.string.isRequired,
-    city: PropTypes.string.isRequired
+    location: PropTypes.string.isRequired,
+    price: PropTypes.number.isRequired,
+    mortgage: PropTypes.string,
+    image: PropTypes.string.isRequired,
+    attribute: PropTypes.shape({}).isRequired
+};
+
+Card.defaultProps = {
+    mortgage: 'Rp. 2,61jt / bulan'
 };
 
 export default Card;
