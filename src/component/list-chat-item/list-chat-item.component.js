@@ -13,6 +13,8 @@ class ListChatItemComponent extends React.PureComponent {
         const { type, index, data } = this.props;
 
         const response = {
+            animated: true,
+            fadeIn: true,
             'ui-list-chat__item': true,
             [`ui-list-chat__item--${type}`]: true,
             'ui-list-chat__item--without-icon':

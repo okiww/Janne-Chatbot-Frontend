@@ -40,7 +40,7 @@ const StatusReducers = (state = initial, action) => {
     case SET_DATA_OPTIONS:
         return {
             ...state,
-            data: action.payload.data
+            data: action.payload.option
         };
     default:
         return state;
