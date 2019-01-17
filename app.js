@@ -1,24 +1,19 @@
-const express = require('express');
-const http = require('http');
+/* eslint-disable */
 const path = require('path');
+const express = require('express');
+const app = express();
+const PORT = process.env.PORT || 8080;
 
-var app = express();
+app.use(express.static(path.join(__dirname, 'dist')));
 
-app.use(express.static(path.join(__dirname, 'build')));
+app.get('*', function(request, response) {
+  response.sendFile(__dirname + '/dist/index.html');
+});
 
-const port = process.env.PORT || '8080';
-app.set('port', port);
-
-if (process.env.NODE_ENV === 'production') {
-    // Exprees will serve up production assets
-    app.use(express.static('/dist'));
-
-    // Express serve up index.html file if it doesn't recognize route
-    const path = require('path');
-    app.get('*', (req, res) => {
-        res.sendFile(path.resolve(__dirname, '/dist', 'index.html'));
-    });
-}
-
-const server = http.createServer(app);
-server.listen(port, () => console.log(`Running on localhost:${port}`));
+app.listen(
+  PORT,
+  error =>
+    error
+      ? console.error(error)
+      : console.info(`Listening on port ${PORT}. Visit http://localhost:${PORT}/ in your browser.`)
+);
