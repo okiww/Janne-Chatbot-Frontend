@@ -12,8 +12,7 @@
     "prod": "node_modules/.bin/webpack --config build/webpack.config.prod.js",
     "lint": "node_modules/.bin/eslint --ext .js,.jsx src",
     "precommit-msg": "echo 'Pre-commit checks...' && exit 0",
-    "precommit": "npm run lint",
-    "postinstall": "react-scripts build"
+    "precommit": "npm run lint"
   },
   "engines": {
     "node": "~6.10.3",
