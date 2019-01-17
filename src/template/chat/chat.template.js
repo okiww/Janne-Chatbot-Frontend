@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import AnimateHelper from '@/helper/animate.helper';
 import { showNavbarAction } from '@/actions/status.action';
+import { sendChat } from '@/actions/chat.action';
 
 import './style.scss';
 
@@ -18,11 +19,13 @@ const mapStateToProps = (state) => ({
 });
 
 const mapDispatchToProps = (dispatch) => ({
-    showNavbar: () => dispatch(showNavbarAction())
+    showNavbar: () => dispatch(showNavbarAction()),
+    sendChatMessage: (message) => dispatch(sendChat(message))
 });
 
 class ChatTemplate extends React.PureComponent {
     state = {
+        enableClick: false,
         showDialog: false,
         style: { opacity: 0, display: 'none' },
         styleButton: { opacity: 0, display: 'none' }
@@ -32,11 +35,23 @@ class ChatTemplate extends React.PureComponent {
         super(props);
         this.setShowNavbar = this.setShowNavbar.bind(this);
         this.showChatDialog = this.showChatDialog.bind(this);
+        this.onMessage = this.onMessage.bind(this);
         this.helper = new AnimateHelper();
     }
 
     componentDidMount() {
         this.setAnimationButton();
+
+        setTimeout(() => {
+            this.showChatDialog();
+            this.setState({ enableClick: true });
+        }, 3000);
+    }
+
+    onMessage(param) {
+        const { sendChatMessage } = this.props;
+
+        sendChatMessage(param);
     }
 
     setShowNavbar() {
@@ -53,7 +68,7 @@ class ChatTemplate extends React.PureComponent {
     setAnimationComponent(show) {
         this.setAnimation({
             callback: (x) => this.animationComponent(show, x),
-            duration: 166,
+            duration: show ? 611 : 166,
             interval: 0
         });
     }
@@ -78,6 +93,7 @@ class ChatTemplate extends React.PureComponent {
         const style = {
             opacity: show ? x : 1 - x
         };
+
         const translate = x * 5;
 
         if (show) {
@@ -101,7 +117,7 @@ class ChatTemplate extends React.PureComponent {
 
     render() {
         const { show, suggestion, chat } = this.props;
-        const { style, styleButton } = this.state;
+        const { style, styleButton, enableClick } = this.state;
 
         return (
             <div className="ui-chat">
@@ -110,14 +126,14 @@ class ChatTemplate extends React.PureComponent {
                         <Header show={show} />
                         <Welcome show={!show} onShowWelcome={this.setShowNavbar} />
                         <ChatContainer chat={chat} show={show} suggestion={suggestion} />
-                        <Form disabled={!show} />
+                        <Form disabled={!show} onMessage={this.onMessage} />
                     </Suspense>
                 </div>
                 <button
                     style={styleButton}
                     className="ui-chat-template__button"
                     type="submit"
-                    onClick={this.showChatDialog}
+                    onClick={enableClick ? this.showChatDialog : null}
                 >
                     <img src="./static/images/apps.png" alt="" />
                 </button>
@@ -128,6 +144,7 @@ class ChatTemplate extends React.PureComponent {
 
 ChatTemplate.propTypes = {
     chat: PropTypes.arrayOf(PropTypes.shape({})),
+    sendChatMessage: PropTypes.func,
     show: PropTypes.bool,
     showNavbar: PropTypes.func,
     suggestion: PropTypes.shape({})
@@ -135,6 +152,7 @@ ChatTemplate.propTypes = {
 
 ChatTemplate.defaultProps = {
     chat: [],
+    sendChatMessage: () => {},
     show: false,
     showNavbar: () => {},
     suggestion: {

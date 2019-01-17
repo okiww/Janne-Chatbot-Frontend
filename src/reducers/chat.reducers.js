@@ -1,13 +1,18 @@
 export const ADD_CHAT = 'ADD_CHAT';
+export const SEND_CHAT = 'SEND_CHAT';
 
 const initial = {
     chat: [
         // TODO
         // Sample Chat
-        // {
-        //     type: 'bot',
-        //     message: 'Apakah Anda ingin mencari di semua kota Bandung atau ada daerah spesifik?'
-        // },
+        {
+            type: 'bot',
+            message: 'Apakah Anda ingin mencari di semua kota Bandung atau ada daerah spesifik?'
+        },
+        {
+            type: 'bot',
+            message: 'Apakah Anda ingin mencari di semua kota Bandung atau ada daerah spesifik?'
+        }
         // {
         //     type: 'user',
         //     message: 'Daerah Spesifik'
@@ -75,6 +80,17 @@ const ChatReducers = (state = initial, action) => {
         return {
             ...state,
             chat: [...state.chat, action.payload.message]
+        };
+    case SEND_CHAT:
+        return {
+            ...state,
+            chat: [
+                ...state.chat,
+                {
+                    type: 'user',
+                    message: action.payload.message
+                }
+            ]
         };
     default:
         return state;

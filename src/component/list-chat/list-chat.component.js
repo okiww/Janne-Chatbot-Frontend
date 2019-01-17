@@ -31,11 +31,7 @@ class ListChatComponent extends React.PureComponent {
                         ),
                         user: () => (
                             <div className="ui-list-chat__item ui-list-chat__item--user">
-                                <Text>
-                                    {item.message}
-                                    {' '}
-                                    {index}
-                                </Text>
+                                <Text>{item.message}</Text>
                             </div>
                         ),
                         suggestion: () => <ListProperty data={item.data} />
