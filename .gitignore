@@ -213,5 +213,3 @@ GitHub.sublime-settings
 .history
 
 # End of https://www.gitignore.io/api/node,bower,sublimetext,phpstorm+all,visualstudiocode
-
-dist/
