@@ -26,9 +26,22 @@
             }
 
             &.ui-list-chat__item--without-icon {
+                &::after,
                 &::before {
                     display: none;
                 }
+            }
+
+            &::after {
+                content: '';
+                content: '';
+                position: absolute;
+                border-top: 7px solid transparent;
+                border-bottom: 7px solid transparent;
+                border-right: 7px solid #537fed;
+                top: 50%;
+                left: 33px;
+                transform: translateY(-50%);
             }
 
             &::before {

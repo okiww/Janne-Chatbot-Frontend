@@ -24,6 +24,7 @@ module.exports = {
         indent: [2, 4],
         'import/no-extraneous-dependencies': [0],
         'import/no-unresolved': [0],
+        'import/prefer-default-export': [0],
         'import/resolver': {
             node: {
                 extensions: ['.js', '.jsx', '.vue', '.es6']

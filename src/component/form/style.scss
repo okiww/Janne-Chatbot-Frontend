@@ -10,6 +10,8 @@
     border-top: thin solid #d8e2e8;
     overflow: hidden;
     z-index: 100;
+    transform: translateY(0%);
+    transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
 
     &::before {
         content: '';
@@ -29,6 +31,7 @@
 
     &--disable {
         border-top: thin solid #ededed;
+        transform: translateY(100%);
 
         &::before {
             opacity: 1;
