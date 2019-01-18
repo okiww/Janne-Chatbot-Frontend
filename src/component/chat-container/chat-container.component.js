@@ -87,7 +87,7 @@ class ChatContainerComponent extends React.PureComponent {
                     }}
                     autoHide
                 >
-                    <ListChat data={chat} />
+                    <ListChat suggestionShow={suggestion.show} data={chat} />
                 </Scrollbars>
                 <Suggestion {...suggestion} />
             </div>
