@@ -6,14 +6,23 @@ import ArrayHelper from '@/helper/array.helper';
 import Icon from '@/component/icon/icon.component';
 
 class FormComponent extends React.PureComponent {
+    constructor(props) {
+        super(props);
+
+        this.onSearch = this.onSearch.bind(this);
+    }
+
     onSearch() {
         const { query } = this.state;
-        const { onMessage } = this.props;
-        this.fileInput.value = '';
 
-        this.setState({ query: '' }, () => {
-            onMessage(query);
-        });
+        if (query !== '') {
+            const { onMessage } = this.props;
+            this.fileInput.value = '';
+
+            this.setState({ query: '' }, () => {
+                onMessage(query);
+            });
+        }
     }
 
     get className() {
@@ -45,7 +54,7 @@ class FormComponent extends React.PureComponent {
                         return true;
                     }}
                 />
-                <button type="submit">
+                <button type="submit" onClick={this.onSearch}>
                     <Icon>near_me</Icon>
                 </button>
             </div>

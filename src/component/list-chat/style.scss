@@ -2,6 +2,11 @@
     display: block;
     padding: 10px;
     text-align: left;
+    transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+
+    &--show-suggestion {
+        margin-bottom: 30px;
+    }
 
     &__item {
         position: relative;

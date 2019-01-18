@@ -74,46 +74,48 @@ class Card extends React.PureComponent {
 
     render() {
         const {
-            id, image, title, location, price, mortgage
+            id, image, title, location, price, mortgage, link
         } = this.props;
 
         return (
-            <div className="ui-card">
-                <div className="ui-card__image">
-                    <img src={image} alt={title} />
-                </div>
-                <div className="ui-card__content">
-                    <div className="ui-card__price">
-                        <Text type="h2">
-                            Rp
-                            {Card.priceFormatter(price)}
-                        </Text>
-                        <Text type="p">
-                            Cicilan
-                            {mortgage || 'Rp. 2,61jt / bulan'}
-                        </Text>
+            <a href={link} style={{ textDecoration: 'none' }}>
+                <div className="ui-card">
+                    <div className="ui-card__image">
+                        <img src={image} alt={title} />
                     </div>
-                    <div className="ui-card__address">{location}</div>
-                    <div className="ui-card__attribute">
-                        {this.attribute.map((item) => (
-                            <div
-                                key={`${id}-${item.label}-${Card.getRandom()}`}
-                                className="ui-card__attribute__item"
-                            >
-                                <img alt="" src={item.icon} />
-                                <Text>
-                                    {item.value ? item.value : '-'}&nbsp;
-                                    <span
-                                        dangerouslySetInnerHTML={{
-                                            __html: item.value ? item.label : null
-                                        }}
-                                    />
-                                </Text>
-                            </div>
-                        ))}
+                    <div className="ui-card__content">
+                        <div className="ui-card__price">
+                            <Text type="h2">
+                                Rp
+                                {Card.priceFormatter(price)}
+                            </Text>
+                            <Text type="p">
+                                Cicilan
+                                {mortgage || 'Rp. 2,61jt / bulan'}
+                            </Text>
+                        </div>
+                        <div className="ui-card__address">{location}</div>
+                        <div className="ui-card__attribute">
+                            {this.attribute.map((item) => (
+                                <div
+                                    key={`${id}-${item.label}-${Card.getRandom()}`}
+                                    className="ui-card__attribute__item"
+                                >
+                                    <img alt="" src={item.icon} />
+                                    <Text>
+                                        {item.value ? item.value : '-'}&nbsp;
+                                        <span
+                                            dangerouslySetInnerHTML={{
+                                                __html: item.value ? item.label : null
+                                            }}
+                                        />
+                                    </Text>
+                                </div>
+                            ))}
+                        </div>
                     </div>
                 </div>
-            </div>
+            </a>
         );
     }
 }
@@ -121,6 +123,7 @@ class Card extends React.PureComponent {
 Card.propTypes = {
     id: PropTypes.string.isRequired,
     title: PropTypes.string.isRequired,
+    link: PropTypes.string.isRequired,
     location: PropTypes.string.isRequired,
     price: PropTypes.number.isRequired,
     mortgage: PropTypes.string,
@@ -129,7 +132,7 @@ Card.propTypes = {
 };
 
 Card.defaultProps = {
-    mortgage: 'Rp. 2,61jt / bulan'
+    mortgage: '-'
 };
 
 export default Card;

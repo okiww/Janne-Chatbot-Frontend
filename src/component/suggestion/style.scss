@@ -1,10 +1,11 @@
 .ui-suggestion {
     position: absolute;
-    bottom: 5px;
     display: block;
     width: 100%;
     transform: translateY(100%);
     transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+    background: #fff;
+    bottom: 0;
 
     &--show {
         transform: translateY(0);
